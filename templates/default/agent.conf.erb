@@ -4,11 +4,9 @@ api_key = "<%= node['appcanary']['agent']['api_key'] %>"
 <% when 'ubuntu', 'debian' %>
 [[files]]
 path = "/var/lib/dpkg/status"
-<% when 'centos' %>
-  <% if node['platform_version'] =~ /7/ %>
-    [[files]]
-    process = 'rpm -qa'
-  <% end %>
+<% when 'centos', 'redhat', 'amazon', 'scientific', 'oracle' %>
+[[files]]
+process = 'rpm -qa'
 <% end %>
 
 <% node['appcanary']['agent']['paths'].each do |path| %>
